@@ -10,6 +10,7 @@
 */
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 import { createRoot } from 'react-dom/client';
 import { 
   Upload, FileText, Shield, Info, Trash2, 
@@ -4785,6 +4786,12 @@ const App = () => {
 const container = document.getElementById('root');
 if (container) {
   const root = createRoot(container);
+
+// Initialize Vercel Speed Insights (client-side only)
+if (typeof window !== 'undefined') {
+  injectSpeedInsights();
+}
+
   root.render(
     <ErrorBoundary>
       <App />
