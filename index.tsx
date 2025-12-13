@@ -548,6 +548,7 @@ const Dashboard = ({
   onReset,
   onToggleStatus, 
   t,
+  language,
   navigateToView,
   files,
   setFiles,
@@ -1086,7 +1087,7 @@ const Dashboard = ({
             <div class="ayah-box">
               <div class="ayah-arabic"> ۗ يَمْحَقُ ٱللَّهُ ٱلرِّبَوٰا۟ وَيُرْبِى ٱلصَّدَقَـٰتِ</div>
               <div class="ayah-ref">Surah Al-Baqarah (2:276)</div>
-              <div class="ayah-translation">"Allah deprives interest of all blessing, whereas He blesses charity with growth."</div>
+              <div class="ayah-translation">"${language === 'ar' ? 'يُهلكُ اللهُ الرِّبا ويُنمي الصدقات' : language === 'ur' ? 'اللہ سود کو مٹا دیتا ہے اور صدقات کو بڑھاتا ہے' : language === 'hi' ? 'अल्लाह सूद को नष्ट कर देता है और सदक़ात को बढ़ाता है' : language === 'bn' ? 'আল্লাহ সুদ ধ্বংস করেন এবং সদকা বৃদ্ধি করেন' : language === 'id' ? 'Allah memusnahkan riba dan menyuburkan sedekah' : language === 'ms' ? 'Allah menghapuskan riba dan mengembangkan sedekah' : language === 'zh' ? '真主消灭利息，而使施舍增长' : language === 'fr' ? 'Allah anéantit l\'usure et fait fructifier les aumônes' : language === 'de' ? 'Allah vernichtet den Zins und lässt die Almosen wachsen' : language === 'ru' ? 'Аллах уничтожает ростовщичество и приумножает милостыню' : language === 'nl' ? 'Allah vernietigt de rente en doet de liefdadigheid toenemen' : language === 'he' ? 'אללה מוחה את הריבית ומרבה את הצדקה' : language === 'tr' ? 'Allah faizi yok eder, sadakaları ise artırır' : language === 'bs' ? 'Allah uništava kamatu, a umnožava sadaku' : language === 'sq' ? 'Allahu e zhduk kamatën dhe i shton sadakatë' : 'Allah deprives interest of all blessing, whereas He blesses charity with growth.'}"</div>
             </div>
 
             <div class="summary-box">
@@ -1887,7 +1888,7 @@ const ManifestoView = ({ t }: any) => (
 );
 
 // 5. Purification View
-const PurificationView = ({ history, onClearHistory, t, setActiveView, setHistory, transactions, onUpload }: any) => {
+const PurificationView = ({ history, onClearHistory, t, language, setActiveView, setHistory, transactions, onUpload }: any) => {
   const [activeTab, setActiveTab] = useState<'pending' | 'disposed'>('pending');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
 
@@ -2320,7 +2321,7 @@ const PurificationView = ({ history, onClearHistory, t, setActiveView, setHistor
             <div class="ayah-box">
               <div class="ayah-arabic">يَمْحَقُ اللَّهُ الرِّبَا وَيُرْبِي الصَّدَقَاتِ</div>
               <div class="ayah-ref">Surah Al-Baqarah (2:276)</div>
-              <div class="ayah-translation">"Allah destroys interest and gives increase for charities."</div>
+              <div class="ayah-translation">"${language === 'ar' ? 'يُهلكُ اللهُ الرِّبا ويُنمي الصدقات' : language === 'ur' ? 'اللہ سود کو مٹا دیتا ہے اور صدقات کو بڑھاتا ہے' : language === 'hi' ? 'अल्लाह सूद को नष्ट कर देता है और सदक़ात को बढ़ाता है' : language === 'bn' ? 'আল্লাহ সুদ ধ্বংস করেন এবং সদকা বৃদ্ধি করেন' : language === 'id' ? 'Allah memusnahkan riba dan menyuburkan sedekah' : language === 'ms' ? 'Allah menghapuskan riba dan mengembangkan sedekah' : language === 'zh' ? '真主消灭利息，而使施舍增长' : language === 'fr' ? 'Allah anéantit l\'usure et fait fructifier les aumônes' : language === 'de' ? 'Allah vernichtet den Zins und lässt die Almosen wachsen' : language === 'ru' ? 'Аллах уничтожает ростовщичество и приумножает милостыню' : language === 'nl' ? 'Allah vernietigt de rente en doet de liefdadigheid toenemen' : language === 'he' ? 'אללה מוחה את הריבית ומרבה את הצדקה' : language === 'tr' ? 'Allah faizi yok eder, sadakaları ise artırır' : language === 'bs' ? 'Allah uništava kamatu, a umnožava sadaku' : language === 'sq' ? 'Allahu e zhduk kamatën dhe i shton sadakatë' : 'Allah destroys interest and gives increase for charities.'}"</div>
             </div>
 
             <div class="summary-section">
@@ -4698,6 +4699,7 @@ const App = () => {
               onReset={handleReset}
               onToggleStatus={toggleTransactionStatus} 
               t={t}
+              language={language}
               navigateToView={navigateToView}
               files={files}
               setFiles={setFiles}
@@ -4708,7 +4710,7 @@ const App = () => {
           {activeView === 'knowledge' && <BlogPage t={t} language={language} />}
           {activeView === 'methodology' && <MethodologyView t={t} userProfile={userProfile} />}
           {activeView === 'manifesto' && <ManifestoView t={t} />}
-          {activeView === 'purification' && <PurificationView history={history} setHistory={setHistory} onClearHistory={handleClearHistory} t={t} setActiveView={navigateToView} transactions={transactions} />}
+          {activeView === 'purification' && <PurificationView history={history} setHistory={setHistory} onClearHistory={handleClearHistory} t={t} language={language} setActiveView={navigateToView} transactions={transactions} onUpload={processFiles} />}
           {activeView === 'donate' && <DonateView t={t} totalRiba={transactions.filter((t: Transaction) => t.isRiba).reduce((acc: number, t: Transaction) => acc + t.amount, 0)} currency={transactions[0]?.currency || 'USD'} />}
           {activeView === 'settings' && <SettingsView userProfile={userProfile} setUserProfile={setUserProfile} t={t} />}
         </div>
