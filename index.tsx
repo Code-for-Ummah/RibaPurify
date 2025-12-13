@@ -266,8 +266,8 @@ const useLanguage = () => {
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
       if (tz.includes('Asia/Dubai') || tz.includes('Riyadh')) return 'ar';
-      if (tz.includes('Calcutta')) return 'hi';
-      if (tz.includes('Karachi')) return 'ur';
+      if (tz.includes('Calcutta')) return 'en'; // India defaults to English
+      if (tz.includes('Karachi')) return 'en'; // Pakistan defaults to English
       if (tz.includes('Jakarta')) return 'id';
       if (tz.includes('Berlin')) return 'de';
       if (tz.includes('Moscow')) return 'ru';
