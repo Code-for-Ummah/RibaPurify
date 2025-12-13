@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="description" content="Zero-knowledge bank statement analyzer for detecting Riba (interest). 100% local processing, Shariah-compliant.">
+  <title>RibaPurify - Islamic Finance Tool</title>
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              850: '#151f32',
+              950: '#020617',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts: Optimized loading with preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Load only used font weights with display=swap for faster render -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+Bengali:wght@400;700&family=Rubik:wght@400;600;700&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Custom Scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    /* Mobile Scroll Optimization */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: none;
+    }
+    
+    /* Font Families Mapping */
+    .font-sans { font-family: 'Inter', sans-serif; }
+    .font-arabic { font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif; }
+    .font-urdu { font-family: 'Noto Nastaliq Urdu', 'IBM Plex Sans Arabic', serif; line-height: 2.2; }
+    .font-hindi { font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif; }
+    .font-bengali { font-family: 'Hind Siliguri', 'Noto Serif Bengali', sans-serif; }
+    .font-chinese { font-family: 'Noto Sans SC', sans-serif; }
+    .font-hebrew { font-family: 'Rubik', sans-serif; }
+        /* New Arabic Fonts */
+    .font-amiri { font-family: 'Amiri', serif; }
+    .font-kufi { font-family: 'Reem Kufi', sans-serif; }
+    .font-cairo { font-family: 'Cairo', sans-serif; }
+ 
+    /* Hover Effects */
+    .hover-card {
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      will-change: transform;
+    }
+    .hover-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    /* Mobile Performance: Disable expensive hover effects on touch devices */
+    @media (pointer: coarse) {
+      .hover-card {
+        transition: none;
+      }
+      .hover-card:hover {
+        transform: none;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+    }
+
+    /* RTL Utilities */
+    [dir="rtl"] .text-left { text-align: right; }
+    [dir="rtl"] .text-right { text-align: left; }
+    [dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+    [dir="rtl"] .mr-auto { margin-left: auto; margin-right: 0; }
+    
+    /* Methodology List */
+    [dir="rtl"] .methodology-list {
+       padding-right: 1.5rem;
+       padding-left: 0;
+    }
+    
+    /* Animation Keyframes */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 20s linear infinite;
+    }
+    
+    /* Disable slow animations on mobile for performance */
+    @media (max-width: 768px) {
+      .animate-spin-slow {
+        animation: none;
+      }
+    }
+    
+    
+    /* Tooltip Styles */
+    .tooltip-container {
+      position: relative;
+      display: inline-flex;
+    }
+    
+    .tooltip-content {
+      position: absolute;
+      z-index: 50;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: white;
+      background-color: #1e293b; /* slate-800 */
+      border-radius: 0.5rem;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px) scale(0.95);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .tooltip-container:hover .tooltip-content {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition-delay: 0.1s; /* Small delay before showing */
+    }
+
+    /* Tooltip Positioning Variants */
+    .tooltip-top {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(4px) scale(0.95);
+      margin-bottom: 0.5rem;
+    }
+    .tooltip-container:hover .tooltip-top {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+    
+    .tooltip-bottom {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-4px) scale(0.95);
+      margin-top: 0.5rem;
+    }
+    .tooltip-container:hover .tooltip-bottom {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    /* Utility for premium shadows */
+    .shadow-premium {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    /* Gradient Masks */
+    .mask-gradient-b {
+      mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    }
+  </style>
+<link rel="stylesheet" href="/index.css">
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('✓ Service Worker registered'))
+          .catch(err => console.log('Service Worker registration failed:', err));
+      });
+    }
+  </script>
+</head>
+<body class="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

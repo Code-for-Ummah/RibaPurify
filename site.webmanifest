@@ -1,0 +1,28 @@
+{
+  "name": "RibaPurify - Islamic Finance Analyzer",
+  "short_name": "RibaPurify",
+  "description": "Zero-knowledge bank statement analyzer for detecting Riba (interest). Works on all mobile browsers - Chrome, Safari, Firefox, Edge.",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "categories": ["finance", "productivity", "utilities"],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

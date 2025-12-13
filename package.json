@@ -1,0 +1,59 @@
+{
+  "name": "ribapurify",
+  "version": "2.0.0",
+  "description": "Zero-knowledge, local-first Riba (interest) detection tool for Muslims. Shariah-compliant banking statement analyzer with 16 languages support.",
+  "author": "Code for Ummah",
+  "license": "MIT",
+  "homepage": "https://github.com/Code-for-Ummah/RibaPurify",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Code-for-Ummah/RibaPurify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Code-for-Ummah/RibaPurify/issues"
+  },
+  "keywords": [
+    "riba",
+    "islamic-finance",
+    "shariah-compliant",
+    "halal",
+    "banking",
+    "privacy",
+    "zero-knowledge",
+    "muslim",
+    "finance-tracker"
+  ],
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@types/dompurify": "^3.0.5",
+    "dompurify": "^3.3.1",
+    "lucide-react": "^0.555.0",
+    "papaparse": "^5.5.3",
+    "pdfjs-dist": "^5.4.449",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tesseract.js": "^6.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.14.0",
+    "@types/papaparse": "^5.5.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "terser": "^5.44.1",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

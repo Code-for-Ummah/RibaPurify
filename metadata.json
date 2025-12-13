@@ -1,0 +1,5 @@
+{
+  "description": "Zero-knowledge bank statement analyzer for detecting Riba (interest). Works on all mobile browsers - Chrome, Safari, Firefox, Edge.",
+  "requestFramePermissions": [],
+  "name": "RibaPurify"
+}
