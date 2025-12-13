@@ -1,5 +1,7 @@
 # 🕌 RibaPurify - Purify Your Wealth from Riba
 
+<img width="1429" height="749" alt="Screenshot 2025-12-14 at 4 43 30 AM" src="https://github.com/user-attachments/assets/040cd912-ed84-439c-a3b5-5dcddd31cbcf" />
+
 <div align="center">
 
 **Zero-Knowledge · Local-First · Shariah-Compliant**
@@ -179,6 +181,18 @@ RibaPurify supports **16 languages** with full translations:
 
 ---
 
+## 🌱 ScreenShots
+
+(Landing Page)
+
+<img width="1234" height="751" alt="Screenshot 2025-12-14 at 4 49 02 AM" src="https://github.com/user-attachments/assets/b54d0ab8-b445-4f5f-8662-561025006685" />
+<img width="1215" height="743" alt="Screenshot 2025-12-14 at 4 49 14 AM" src="https://github.com/user-attachments/assets/fbc62229-9622-4d12-9948-1d7d21d78301" />
+
+More will be added later inshaAllah
+
+
+
+
 ## 🔒 Privacy & Security
 
 ### **How We Protect Your Data**
@@ -314,8 +328,8 @@ Thank you to all who contributed to making this project better!
 ## 📧 Contact & Support
 
 - **GitHub Issues** - [Report bugs](https://github.com/Code-for-Ummah/RibaPurify/issues)
-- **Email** - contact@codeforummah.org
-- **Website** - [RibaPurify.org](https://ribapurify.org)
+- **Email** - contact@codeforummah.gmail.com
+- **Website** - )
 
 ---
 
