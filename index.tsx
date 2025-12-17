@@ -4222,9 +4222,13 @@ const App = () => {
   // i18n
   const { language, setLanguage, t } = useLanguage();
 
-  // Scroll Reset with smooth behavior
+  // Scroll Reset - smooth with delay to feel natural
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Small delay to let the transition start, then scroll
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 50);
+    return () => clearTimeout(timer);
   }, [activeView]);
 
   // Save History
@@ -4614,9 +4618,36 @@ const App = () => {
     <div className={`min-h-screen bg-white ${useMemo(() => LANGUAGES.find(l => l.code === language)?.fontClass || 'font-sans', [language])}`} style={{scrollBehavior: 'smooth'}}>
       <style>{`
         * { -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; }
-        * { transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; transition-duration: 200ms; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
-        @media (prefers-reduced-motion: reduce) { *, html { scroll-behavior: auto !important; transition: none !important; } }
+        html { scroll-behavior: auto; }
+        
+        /* Smooth view transitions */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .view-transition {
+          animation: fadeInUp 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Smooth hover transitions only */
+        button, a {
+          transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @media (prefers-reduced-motion: reduce) { 
+          *, html { 
+            scroll-behavior: auto !important; 
+            animation: none !important;
+            transition: none !important; 
+          } 
+        }
       `}</style>
       {/* Global File Input */}
       <input 
@@ -4689,7 +4720,15 @@ const App = () => {
         )}
         
         <div className="relative z-10">
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500" key={activeView}>
+          <div
+            className="view-transition"
+            key={activeView}
+            style={{
+              animation: 'fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden'
+            }}
+          >
           {activeView === 'dashboard' && (
             <Dashboard 
               userProfile={userProfile} 
@@ -4767,7 +4806,15 @@ const App = () => {
                 </div>
               </div>
               <div className="pt-6 border-t border-slate-200">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="mb-4 text-center max-w-3xl mx-auto">
+                  <p className="text-sm text-slate-700 mb-2">
+                    A product of <a href="https://github.com/Code-for-Ummah" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-600 hover:text-blue-700 transition-colors">CodeForUmmah</a> — solving the issues of the Ummah through technology.
+                  </p>
+                  <p className="text-xs text-slate-600">
+                    Halal tech built for the sake of Allah alone. If you're into code, design, or ideas, you're welcome to contribute.
+                  </p>
+                </div>
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-100">
                   <p className="text-xs text-slate-500">© 2025 RibaPurify. {t('footer_copyright')}</p>
                   <div className="flex items-center gap-4">
                     <a href="https://github.com/Code-for-Ummah" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-900 transition-colors" aria-label="GitHub">
