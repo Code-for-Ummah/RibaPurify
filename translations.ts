@@ -231,7 +231,7 @@ export const TRANSLATIONS = {
     footer_feature_privacy: "Complete Privacy",
     footer_feature_privacy_desc: "All data stays on your device",
     footer_feature_local: "Local Processing",
-    footer_feature_local_desc: "No internet required",
+    footer_feature_local_desc: "Runs entirely in your browser",
     footer_feature_shariah: "Shariah Compliant",
     footer_feature_shariah_desc: "Verified methodology",
     footer_feature_knowledge: "Knowledge Hub",
